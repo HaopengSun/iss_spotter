@@ -3,8 +3,10 @@ const request = require('request');
 // fetch our public IP Address, which will later help (approximately) locate us geographically
 const fetchMyIP = function(callback) { 
   request('https://api.ipify.org?format=json', (error, response, body) => {
+    // this error will be sent when request part causes error
     if (error) return callback(error, null);
 
+    // this error will be sent when the responce part causes error
     if (response.statusCode !== 200) {
       callback(Error(`Status Code ${response.statusCode} when fetching IP: ${body}`), null);
       return;
